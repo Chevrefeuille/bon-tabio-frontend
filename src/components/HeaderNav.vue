@@ -66,8 +66,8 @@ const views = [
       <RouterLink class="text-base font-medium" to="/">Bon-tabio</RouterLink>
       <div class="flex justify-around space-x-10">
         <RouterLink
-          v-for="view in views"
-          :key="view.name"
+          v-for="(view, i) in views"
+          :key="i"
           class="text-base font-medium"
           active-class="underline underline-offset-8 decoration-2  font-extrabold"
           :to="view.route"
