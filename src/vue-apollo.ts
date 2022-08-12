@@ -7,7 +7,7 @@ import {
 // HTTP connection to the API
 const httpLink = createHttpLink({
   // You should use an absolute URL here
-  uri: import.meta.env.VUE_APP_GRAPHQL_URL || "http://localhost:1337/graphql",
+  uri: import.meta.env.VITE_GRAPHQL_URL,
 });
 
 // Cache implementation
