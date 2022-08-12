@@ -1,6 +1,5 @@
 <script setup lang="ts"></script>
 
 <template>
-  <main>Home</main>
-  <o-button>Click Me</o-button>
+  <h1>This is the home page</h1>
 </template>
