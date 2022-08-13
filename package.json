@@ -21,10 +21,12 @@
     "graphql": "^16.5.0",
     "graphql-tag": "^2.12.6",
     "vue": "^3.2.37",
-    "vue-router": "^4.1.2"
+    "vue-router": "^4.1.2",
+    "vue3-markdown-it": "^1.0.10"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
+    "@tailwindcss/typography": "^0.5.4",
     "@types/jsdom": "^16.2.14",
     "@types/node": "^16.11.45",
     "@vitejs/plugin-vue": "^3.0.1",

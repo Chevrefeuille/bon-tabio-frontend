@@ -61,7 +61,7 @@ const views = [
     </transition>
   </Popover>
 
-  <header class="sticky top-0 z-10 hidden p-6 shadow-md md:block">
+  <header class="sticky top-0 z-10 hidden bg-white p-6 shadow-md md:block">
     <nav class="mx-auto flex items-center justify-between px-6">
       <RouterLink class="text-base font-medium" to="/">Bon-tabio</RouterLink>
       <div class="flex justify-around space-x-10">
