@@ -61,9 +61,11 @@ const views = [
     </transition>
   </Popover>
 
-  <header class="sticky top-0 z-10 hidden bg-white p-6 shadow-md md:block">
+  <header
+    class="sticky top-0 z-10 mx-5 hidden border-b-2 border-gray-300 bg-white p-6 md:block"
+  >
     <nav class="mx-auto flex items-center justify-between px-6">
-      <RouterLink class="text-base font-medium" to="/">Bon-tabio</RouterLink>
+      <RouterLink class="text-xl font-bold" to="/">Bon-tabio</RouterLink>
       <div class="flex justify-around space-x-10">
         <RouterLink
           v-for="(view, i) in views"

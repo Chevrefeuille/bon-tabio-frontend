@@ -21,7 +21,13 @@ const reviews = computed(() => result.value?.reviews.data ?? []);
 
 <template>
   <div class="md:grid md:grid-cols-3 md:gap-4" v-if="result">
-    <div v-for="(review, i) in reviews" :key="i" class="shadow-md">
+    <div v-for="(review, i) in reviews" :key="i" class="rounded shadow-md">
+      <div>
+        <img
+          src="https://via.placeholder.com/150"
+          class="max-h-32 object-cover"
+        />
+      </div>
       <RouterLink :to="`/curries/${review.id}`">{{
         review.attributes.name
       }}</RouterLink>
