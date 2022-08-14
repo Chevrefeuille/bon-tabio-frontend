@@ -4,7 +4,6 @@ import { useQuery } from "@vue/apollo-composable";
 import { computed } from "vue";
 import gql from "graphql-tag";
 
-const url = import.meta.env.VITE_BACKEND_URL;
 const { result } = useQuery(gql`
   query getReviews {
     reviews {
@@ -37,7 +36,7 @@ const reviews = computed(() => result.value?.reviews.data ?? []);
     >
       <div class="relative h-48 rounded-lg bg-red-300">
         <img
-          :src="`${url}${review.attributes.image.data.attributes.url}`"
+          :src="review.attributes.image.data.attributes.url"
           class="h-full w-full rounded-lg object-cover"
         />
         <div
