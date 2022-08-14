@@ -25,12 +25,12 @@ const review = computed(() => result.value?.review.data.attributes ?? []);
 </script>
 
 <template>
-  <section>
-    <h1>
+  <section class="mx-auto max-w-4xl">
+    <h1 class="text-3xl font-bold">
       {{ review.name }}
     </h1>
 
-    <article class="prose prose-slate" v-if="review.content">
+    <article class="prose max-w-none" v-if="review.content">
       <vue-markdown :source="review.content" />
     </article>
   </section>

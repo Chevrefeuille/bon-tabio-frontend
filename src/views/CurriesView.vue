@@ -4,6 +4,7 @@ import { useQuery } from "@vue/apollo-composable";
 import { computed } from "vue";
 import gql from "graphql-tag";
 
+const url = import.meta.env.VITE_BACKEND_URL;
 const { result } = useQuery(gql`
   query getReviews {
     reviews {
@@ -11,6 +12,14 @@ const { result } = useQuery(gql`
         id
         attributes {
           name
+          date
+          image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
         }
       }
     }
@@ -20,17 +29,26 @@ const reviews = computed(() => result.value?.reviews.data ?? []);
 </script>
 
 <template>
-  <div class="md:grid md:grid-cols-3 md:gap-4" v-if="result">
-    <div v-for="(review, i) in reviews" :key="i" class="rounded shadow-md">
-      <div>
+  <div class="md:grid md:grid-cols-4 md:gap-4" v-if="result">
+    <RouterLink
+      v-for="(review, i) in reviews"
+      :key="i"
+      :to="`/curries/${review.id}`"
+    >
+      <div class="relative h-48 rounded-lg bg-red-300">
         <img
-          src="https://via.placeholder.com/150"
-          class="max-h-32 object-cover"
+          :src="`${url}${review.attributes.image.data.attributes.url}`"
+          class="h-full w-full rounded-lg object-cover"
         />
+        <div
+          class="absolute inset-x-0 bottom-0 rounded-lg bg-gradient-to-t from-black p-3"
+        >
+          <p class="text-lg font-medium text-white">
+            {{ review.attributes.name }}
+          </p>
+          <p class="text-slate-100">{{ review.attributes.date }}</p>
+        </div>
       </div>
-      <RouterLink :to="`/curries/${review.id}`">{{
-        review.attributes.name
-      }}</RouterLink>
-    </div>
+    </RouterLink>
   </div>
 </template>
