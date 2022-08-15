@@ -4,7 +4,9 @@ import { useQuery } from "@vue/apollo-composable";
 import { computed } from "vue";
 import gql from "graphql-tag";
 
-const { result } = useQuery(gql`
+const base_url = import.meta.env.VITE_BACKEND_URL;
+
+const { result: reviewsResult } = useQuery(gql`
   query getReviews {
     reviews {
       data {
@@ -14,9 +16,7 @@ const { result } = useQuery(gql`
           date
           image {
             data {
-              attributes {
-                url
-              }
+              id
             }
           }
         }
@@ -24,11 +24,35 @@ const { result } = useQuery(gql`
     }
   }
 `);
-const reviews = computed(() => result.value?.reviews.data ?? []);
+const reviews = computed(() => reviewsResult.value?.reviews.data ?? []);
+
+const { result: fileResults } = useQuery(gql`
+  query getUploads {
+    uploadFiles {
+      data {
+        id
+        attributes {
+          formats
+        }
+      }
+    }
+  }
+`);
+const files = computed(() => fileResults.value?.uploadFiles.data ?? []);
+
+const getAllFormats = (imageID: number) => {
+  if (!files.value.length) {
+    return undefined;
+  }
+  return files.value.find((file: any) => file.id == imageID).attributes.formats;
+};
 </script>
 
 <template>
-  <div class="md:grid md:grid-cols-4 md:gap-4" v-if="result">
+  <div
+    class="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-4"
+    v-if="reviews"
+  >
     <RouterLink
       v-for="(review, i) in reviews"
       :key="i"
@@ -36,7 +60,10 @@ const reviews = computed(() => result.value?.reviews.data ?? []);
     >
       <div class="relative h-48 rounded-lg bg-red-300">
         <img
-          :src="review.attributes.image.data.attributes.url"
+          v-if="getAllFormats(review.attributes.image.data.id)"
+          :src="`${base_url}${
+            getAllFormats(review.attributes.image.data.id).small.url
+          }`"
           class="h-full w-full rounded-lg object-cover"
         />
         <div
