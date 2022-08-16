@@ -4,6 +4,7 @@ import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 const views = [
   { name: "Posts", route: "/posts" },
   { name: "Curries", route: "/curries" },
+  { name: "Recipes", route: "/recipes" },
 ];
 </script>
 
@@ -61,9 +62,7 @@ const views = [
     </transition>
   </Popover>
 
-  <header
-    class="sticky top-0 z-10 mx-5 hidden border-b-2 border-gray-300 bg-white p-6 md:block"
-  >
+  <header class="sticky top-0 z-10 hidden bg-white p-6 md:block">
     <nav class="mx-auto flex items-center justify-between px-6">
       <RouterLink class="text-xl font-extrabold text-pink-900" to="/"
         >Bon Tabio</RouterLink
